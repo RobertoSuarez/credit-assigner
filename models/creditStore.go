@@ -17,3 +17,7 @@ func (cs *CreditStore) SaveCredit(credit Credit) {
 	CreditoDB = append(CreditoDB, credit)
 	fmt.Println(CreditoDB)
 }
+
+func (cs *CreditStore) AllCredit() []Credit {
+	return CreditoDB
+}
