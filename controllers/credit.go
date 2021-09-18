@@ -66,7 +66,7 @@ func (credit *CreditController) Post(c *fiber.Ctx) error {
 	creditrow.Successful = true
 	fmt.Println(creditrow)
 	credit.DB.SaveCredit(*creditrow)
-	return c.Status(http.StatusOK).JSON(jsonview.ModelCreditTojson(creditrow))
+	return c.Status(http.StatusOK).JSON(ModelCreditTojson(creditrow))
 }
 
 type CreditAssigner interface {
@@ -105,4 +105,13 @@ func (c *Credit) Assign(investment int32) (int32, int32, int32, error) {
 
 	//fmt.Println(x, y, z)
 	return int32(x), int32(y), int32(z), nil
+}
+
+// Convertir de models.credit a json.credit, para enviar al cliente
+func ModelCreditTojson(mCredit *models.Credit) *jsonview.Credit {
+	return &jsonview.Credit{
+		Credit_type_300: mCredit.Credit_type_300,
+		Credit_type_500: mCredit.Credit_type_500,
+		Credit_type_700: mCredit.Credit_type_700,
+	}
 }

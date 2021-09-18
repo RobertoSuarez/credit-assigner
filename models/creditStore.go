@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/RobertoSuarez/creditos/config/db"
+	"github.com/RobertoSuarez/creditos/jsonview"
 )
 
 var (
@@ -36,25 +37,28 @@ func (cs *CreditStore) SaveCredit(credit Credit) error {
 }
 
 // AllCredit trae todos los creditos
-func (cs *CreditStore) AllCredit() []Credit {
+func (cs *CreditStore) AllCredit() jsonview.Statistics {
+	data := jsonview.Statistics{}
 	conn, err := cs.OpenDB(context.Background())
 	if err != nil {
 		fmt.Println(err)
 	}
 	defer conn.Close(context.Background())
-	rows, err := conn.Query(context.Background(), `select "ID", "Investment", "Credit_type_300", "Credit_type_500", "Credit_type_700", "Successful" from credit;`)
+	rows, err := conn.Query(context.Background(), `select * from get_estaditicas();`)
 	if err != nil {
 		fmt.Println(err)
 	}
-
 	for rows.Next() {
-		cre := Credit{}
-		err = rows.Scan(&cre.ID, &cre.Investment, &cre.Credit_type_300, &cre.Credit_type_500, &cre.Credit_type_700, &cre.Successful)
+		err = rows.Scan(
+			&data.Total_assignments,
+			&data.Total_assignments_successful,
+			&data.Total_assignments_failed,
+			&data.Average_investment_successful,
+			&data.Average_investment_failed)
 		if err != nil {
 			fmt.Println(err)
 		}
-		fmt.Println(cre)
 	}
-
-	return CreditoDB
+	fmt.Println(data)
+	return data
 }
