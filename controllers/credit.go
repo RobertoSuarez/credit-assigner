@@ -14,14 +14,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// var (
-// 	CreditAPI *fiber.App
-// )
-
-// func init() {
-
-// }
-
 func NewCreditController(confdb *db.ConfigDB) *fiber.App {
 	credit := &CreditController{
 		DB: models.CreditStore{ConfigDB: confdb},

@@ -8,18 +8,11 @@ import (
 	"github.com/RobertoSuarez/creditos/jsonview"
 )
 
-var (
-	CreditoDB []Credit
-)
-
-func init() {
-	CreditoDB = make([]Credit, 0)
-}
-
 type CreditStore struct {
 	*db.ConfigDB
 }
 
+// SaveCredit Almacena el credito en la db.
 func (cs *CreditStore) SaveCredit(credit Credit) error {
 	conn, err := cs.OpenDB(context.Background()) // Abrimos conexión con la config principal.
 	if err != nil {
@@ -36,7 +29,7 @@ func (cs *CreditStore) SaveCredit(credit Credit) error {
 	return nil
 }
 
-// AllCredit trae todos los creditos
+// AllCredit trae todo los datos de las estadisticas.
 func (cs *CreditStore) AllCredit() jsonview.Statistics {
 	data := jsonview.Statistics{}
 	conn, err := cs.OpenDB(context.Background())

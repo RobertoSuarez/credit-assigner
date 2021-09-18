@@ -1,5 +1,6 @@
 package models
 
+// Credit Modelo que se base la tabla en la db.
 type Credit struct {
 	ID              int
 	Investment      int32
