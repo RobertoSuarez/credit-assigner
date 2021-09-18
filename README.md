@@ -1,6 +1,10 @@
 # Yofio
 ## Prueba técnica.
 
+# Instalar
+```sh
+$ git clone https://github.com/RobertoSuarez/credit-assigner
+```
 Instalar depencias necesarias para el proyecto, se debe estar dentro del proyecto.
 ```sh
 go get
