@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"log"
 	"os"
 
 	"github.com/RobertoSuarez/creditos/config/db"
@@ -9,7 +11,15 @@ import (
 )
 
 func main() {
-	configDB := db.NewConfigDB("postgres://qysutatpjecelb:666b9428a543a4cc9d9c8aef579ad4a57c1f88f9bc9f442df4601c499e7019e7@ec2-34-228-154-153.compute-1.amazonaws.com:5432/d3jatadh6qabag")
+	urldb := os.Getenv("DATABASE_URL")
+	if urldb == "" {
+		log.Println("No existe url a la db")
+		return
+	}
+	fmt.Println(urldb)
+
+	configDB := db.NewConfigDB(urldb)
+
 	app := fiber.New()
 
 	app.Mount("/credit-assignment", controllers.NewCreditController(configDB))
