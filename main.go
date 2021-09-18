@@ -20,7 +20,13 @@ func main() {
 
 	configDB := db.NewConfigDB(urldb)
 
-	app := fiber.New()
+	app := fiber.New(fiber.Config{
+		Prefork:       true,
+		CaseSensitive: true,
+		StrictRouting: false,
+		ServerHeader:  "fiber",
+		AppName:       "Credit Assignment v0.0.0",
+	})
 
 	app.Mount("/credit-assignment", controllers.NewCreditController(configDB))
 	app.Mount("/statistics", controllers.NewStatisticsContrller(configDB))
