@@ -24,7 +24,7 @@ func main() {
 		Prefork:       true,
 		CaseSensitive: true,
 		StrictRouting: false,
-		ServerHeader:  "fiber",
+		ServerHeader:  "Server fiber Credit Assignment",
 		AppName:       "Credit Assignment v0.0.0",
 	})
 
