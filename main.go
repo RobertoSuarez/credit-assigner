@@ -36,5 +36,5 @@ func main() {
 		port = "3000"
 	}
 
-	app.Listen(":" + port)
+	log.Println(app.Listen(":" + port))
 }
