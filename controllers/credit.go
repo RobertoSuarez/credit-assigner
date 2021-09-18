@@ -8,6 +8,7 @@ import (
 	"math"
 	"net/http"
 
+	"github.com/RobertoSuarez/creditos/config/db"
 	"github.com/RobertoSuarez/creditos/jsonview"
 	"github.com/RobertoSuarez/creditos/models"
 	"github.com/gofiber/fiber/v2"
@@ -21,9 +22,9 @@ import (
 
 // }
 
-func NewCreditController() *fiber.App {
+func NewCreditController(confdb *db.ConfigDB) *fiber.App {
 	credit := &CreditController{
-		DB: models.CreditStore{},
+		DB: models.CreditStore{ConfigDB: confdb},
 	}
 
 	// create api

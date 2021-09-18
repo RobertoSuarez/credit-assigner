@@ -3,13 +3,14 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/RobertoSuarez/creditos/config/db"
 	"github.com/RobertoSuarez/creditos/models"
 	"github.com/gofiber/fiber/v2"
 )
 
-func NewStatisticsContrller() *fiber.App {
+func NewStatisticsContrller(confdb *db.ConfigDB) *fiber.App {
 	statisticsHandler := &StatisticsController{
-		DB: &models.CreditStore{},
+		DB: &models.CreditStore{ConfigDB: confdb},
 	}
 
 	statisticsAPI := fiber.New()
